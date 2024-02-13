@@ -1,10 +1,14 @@
 package com.example.wordle;
 
-import java.io.File;
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.file.Files;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
-import org.springframework.util.ResourceUtils;
+
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.lang.NonNull;
 
 public class WordsDictionary {
 
@@ -14,22 +18,27 @@ public class WordsDictionary {
         allWords = words;
     }
 
-    public WordsDictionary(String filePath) {
-        File file;
+    /**
+     * @param filePath
+     */
+    public WordsDictionary(@NonNull String filePath) {
         try {
-            file = ResourceUtils.getFile("classpath:static/words.properties");            
-            allWords = Files.readAllLines(file.toPath());
+            final ClassPathResource resource = new ClassPathResource(filePath);
+            try (InputStream inputStream = resource.getInputStream()) {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                allWords = new ArrayList<>();
+                while (reader.ready()) {
+                    allWords.add(reader.readLine());
+                }
+            }
             allWords.replaceAll(x -> x.toUpperCase());
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }		
+        }
     }
 
     public List<String> getAllWords() {
         return allWords;
     }
 
-
-    
-    
 }

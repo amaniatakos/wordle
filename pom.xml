@@ -11,7 +11,7 @@
 	<groupId>com.example</groupId>
 	<artifactId>wordle</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>wordle</name>
 	<description>Wordle Helper Web Services build on Spring Boot</description>
 	<properties>

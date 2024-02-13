@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.List;
 
+import org.hamcrest.Matcher;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -15,7 +16,13 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -26,20 +33,22 @@ class WordleApplicationTests {
 
 	@Test
 	public void getHello() throws Exception {
+		Matcher<String> greetingValidator = equalTo("Greetings from Wordle! The dictionary contains 14855 words!");
+		assertNotNull(greetingValidator);
+
 		mvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
-				.andExpect(content().string(equalTo("Greetings from Wordle! The dictionary contains 14855 words!")));
+				.andExpect(content().string(greetingValidator));
+
 	}
 
+	@SuppressWarnings("null")
 	@Test
 	public void propose() throws Exception {
-
-		String a = new ObjectMapper().writeValueAsString(getSmileInput());
-
 		mvc.perform(
 				MockMvcRequestBuilders.post("/propose")
 						.contentType(MediaType.APPLICATION_JSON)
-						.content(a)
+						.content(new ObjectMapper().writeValueAsString(getSmileInput()))
 						.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().string(containsStringIgnoringCase("SMILE")));

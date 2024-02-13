@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class WordleController {
 
-	private static final String dictionaryFilePath = "classpath:words.properties"; 
+	private static final String dictionaryFilePath = "/static/words.properties"; 
 	
 	WordsDictionary allCapitalWords = new WordsDictionary(dictionaryFilePath);
 	

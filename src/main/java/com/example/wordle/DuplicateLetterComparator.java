@@ -13,11 +13,6 @@ public class DuplicateLetterComparator implements Comparator<String> {
         return a.compareTo(b);
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        return false;
-    }
-
     private Long calculateDuplicatesWeight(String word) {
         Map<Character, Long> m = word.chars()
                 .mapToObj(ch -> (char) ch)
