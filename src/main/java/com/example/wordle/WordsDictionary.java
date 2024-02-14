@@ -2,7 +2,6 @@ package com.example.wordle;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +23,9 @@ public class WordsDictionary {
     public WordsDictionary(@NonNull String filePath) {
         try {
             final ClassPathResource resource = new ClassPathResource(filePath);
-            try (InputStream inputStream = resource.getInputStream()) {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            try (BufferedReader buffer = new BufferedReader(new InputStreamReader(resource.getInputStream()))) {
                 allWords = new ArrayList<>();
-                while (reader.ready()) {
-                    allWords.add(reader.readLine());
-                }
+                allWords.addAll(buffer.lines().toList());
             }
             allWords.replaceAll(x -> x.toUpperCase());
         } catch (IOException e) {
