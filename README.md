@@ -8,8 +8,19 @@ It was created mainly for demo purposes.
 You can play the original game at https://www.nytimes.com/games/wordle/index.html
 
 
-## /propose
-There is only one API method the (tadah!) */propose*
+## Getting Started
+The project relies on devcontainer, the only thing you need is an IDE (like VSCode) with devcontainer support.
+All the dependencies (jre, maven, spring) are "contained" in the docker image
+
+## How to run the application
+Execute ```mvn spring-boot:run```
+
+Thne you can check if everything is ok by calling ```curl http://localhost:8080```.
+
+There response is something like ```Greetings from Wordle! The dictionary contains 14855 words!```
+
+## API
+There is only one API method named the (tadah!) */propose*
 
 The request is a json object with the following attributes
 1. exactMatch - the letter exists and it is at the right position
@@ -41,7 +52,7 @@ you can call the API with the following attributes
 }
 ```
 
-The curl request is 
+The curl command is
 
 ```
 curl --request POST \
@@ -53,8 +64,6 @@ curl --request POST \
 	"notExist" : ["t", "u", "i", "a", "h", "k", "c", "b"]	
 }'
 ```
-
-
 ## Response Example:
 The response is a list of suggested words.
 
