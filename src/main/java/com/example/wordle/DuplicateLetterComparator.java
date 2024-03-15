@@ -4,6 +4,11 @@ import java.util.Comparator;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Order words based on uniqueness of theire characters.<br>
+ * For example the words [LALA, LORD] will be sorted as [LORD, LALA] because
+ * LALA contains two L's.
+ */
 public class DuplicateLetterComparator implements Comparator<String> {
 
     @Override
@@ -13,6 +18,12 @@ public class DuplicateLetterComparator implements Comparator<String> {
         return a.compareTo(b);
     }
 
+    /**
+     * Count how many duplicate letters exist in the word and return the weight.
+     * 
+     * @param word
+     * @return the weight of the word based on how many dupliacte letters exist.
+     */
     private Long calculateDuplicatesWeight(String word) {
         Map<Character, Long> m = word.chars()
                 .mapToObj(ch -> (char) ch)

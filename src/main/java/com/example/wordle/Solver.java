@@ -7,16 +7,32 @@ import java.util.stream.Collectors;
 import java.util.function.Predicate;
 
 /**
- * 
+ * Filter out from the dictionary any word that does not meet the WordleInput
+ * criteria. Return the remaining words as prodposed.
  */
 public class Solver {
 
+    /**
+     * The dictionary.
+     */
     WordsDictionary dictionary;
 
+    /**
+     * Initialize the class passing the dictionary.
+     * 
+     * @param dictionary
+     */
     public Solver(WordsDictionary dictionary) {
         this.dictionary = dictionary;
     }
 
+    /**
+     * Filter out from the dictionary any word that does not meet the WordleInput
+     * criteria. Return the remaining words as prodposed.
+     * 
+     * @param input
+     * @return the proposed words
+     */
     public List<String> findWords(WordleInput input) {
         Set<Predicate<String>> predicates = new HashSet<Predicate<String>>();
         for (Pair pair : input.getExactMatch()) {
