@@ -19,23 +19,13 @@ public class WordsDictionary {
      * The list that contains all the words.
      */
     List<String> allWords;
-
-    /**
-     * Constructor that accepts a list of words.
-     * 
-     * @param words
-     */
-    public WordsDictionary(List<String> words) {
-        allWords = words;
-    }
-
+   
     /**
      * Text file that contains one word per line.
      * 
      * @param filePath
      */
     public WordsDictionary(@NonNull String filePath) {
-        System.out.println("WordsDictionary constructor!!!");
         try {
             final ClassPathResource resource = new ClassPathResource(filePath);
             try (BufferedReader buffer = new BufferedReader(new InputStreamReader(resource.getInputStream()))) {
