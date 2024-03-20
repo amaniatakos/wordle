@@ -1,3 +1,6 @@
+![Coverage](.github/badges/jacoco.svg)
+![Branches](.github/badges/branches.svg)
+
 # Wordle Solver
 This is a Wordle solver API build on Spring Boot.
 
